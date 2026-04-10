@@ -72,6 +72,22 @@ Add to your MCP config (`.mcp.json` for Claude Code, or Claude Desktop settings)
 3. Create a new app password
 4. Use your full handle (e.g. `yourname.bsky.social`) as the identifier
 
+## Rate Limits & Agent Safety
+
+Bluesky / AT Protocol enforces soft rate limits per 5-minute window:
+
+| Endpoint | Limit | Notes |
+|----------|-------|-------|
+| `createRecord` (post, reply, like, repost) | ~300 / 5 min | Soft limit, may vary by account age |
+| `searchPosts` | ~600 / 5 min | |
+| `getTimeline` | ~1,000 / 5 min | |
+| `getProfile` | ~1,000 / 5 min | |
+| General per-account | ~2,000–5,000 / 5 min | Depends on account reputation |
+
+**Idempotency note:** Bluesky does not deduplicate identical posts. Posting the same text twice creates two records. If your agent retries on timeout, use `get_user_feed` to check whether the post already exists before retrying.
+
+**Token refresh:** The server automatically refreshes expired sessions (401/ExpiredToken) — no manual intervention needed.
+
 ## Usage Examples
 
 **Engage with your community:**
