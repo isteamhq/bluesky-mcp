@@ -1,6 +1,6 @@
 {
   "name": "@isteam/bluesky-mcp",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "MCP server for Bluesky/AT Protocol — search, post, reply, like, follow via AI agents",
   "type": "module",
   "main": "./dist/index.js",
